@@ -303,8 +303,8 @@ class GoogleAnalyticsStream(Stream):
             data_type = self._lookup_data_type(
                 "dimension", dimension, self.dimensions_ref, self.metrics_ref
             )
-            properties.append(th.Property(dimension, self._get_datatype(data_type), required=True))
-            primary_keys.append(dimension)
+            # Disabling primary keys due to nullable customUser values. Handling deduplication later
+            properties.append(th.Property(dimension, self._get_datatype(data_type)))
 
         # Add the metrics to the schema
         for metric in self.report["metrics"]:
